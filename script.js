@@ -1,24 +1,9 @@
 var enter;
 var confirmNumber;
 var confirmCharacter;
-var confirmUppercase;
-var confirmLowercase;
-    // Special characters 
-character = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}", "~"];
-    // Numeric characters
-number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-// Alphabetical characters
-alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    // Convert to uppercase
-space = [];
-
-var choices;
-
-var toUpper = function (x) {
-    return x.toUpperCase();
-};
-    // Uppercase variable
-alpha2 = alpha.map(toUpper);
+var password = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numeric = "0123456789";
+var specialChar = "!#$%&'()*+-./\:\;<=>?@[\\]^_`{|}~;";
 
 var get = document.querySelector("#generate");
 
@@ -42,34 +27,23 @@ function generatePassword() {
         confirmCharacter = confirm("Will this contain special characters?");     
     };
 
-
-    // initialize password variable
-    var password = [];
-  
-    var upperLowerAlpha = alpha.concat(alpha2)
-
-    if (confirmCharacter && confirmNumber) 
-        choices = upperLowerAlpha.concat(number, character);    
-    else if(confirmNumber)
-        choices = upperLowerAlpha.concat(number);
-    else if(confirmCharacter)
-        choices = upperLowerAlpha.concat(character);
-    else
-        choices = upperLowerAlpha;
+    //conditionally adding number and character string to default alpha numeric values 
+    if(confirmNumber)
+        password+=numeric;
+    if(confirmCharacter)
+        password+=specialChar;
     
-    // Starts a Random selection for every variable: 
-    for (var i = 0; i < enter; i++) {
-        var pickChoices = choices[Math.floor(Math.random() * choices.length)];
-        password.push(pickChoices);
+    //calling function to create password
+    return createPassword(password, enter);
+}
+//function with parameters to create password string
+function createPassword(passwordText, count) {
+    var length = count,
+        charset = passwordText,
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
     }
-
-    var ps = password.join("");
-    UserInput(ps);
-    return ps;
+    return retVal;
 }
-    // Changed input to use textcontent
-function UserInput(ps) {
-    document.getElementById("password").textContent = ps;
-
-}
-
+   
