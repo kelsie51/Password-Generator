@@ -20,7 +20,8 @@ SO THAT I can create a strong password that provides greater security
 ```
 GIVEN I need a new, secure password
 WHEN I click the button to generate a password
-THEN I am presented with a series of prompts for password criteria
+THEN I am presented with a series of prompts for password criteria 
+// (abcdefghijklmnopqrstuvwxyz)
 WHEN prompted for password criteria
 THEN I select which criteria to include in the password
 WHEN prompted for the length of the password
